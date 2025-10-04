@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://8i80sac37yyb"]
+
+[ext_resource type="Texture2D" uid="uid://bitsn5nkgpf1n" path="res://assets/scrap/satellite2.png" id="1_r427m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7g3yk"]
+radius = 11.058976
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgo3m"]
+size = Vector2(40, 40)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_d4bi0"]
+a = Vector2(-17, 0)
+b = Vector2(16, 0)
+
+[node name="Node2D" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r427m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.9999998)
+scale = Vector2(-0.8138186, 0.67475325)
+shape = SubResource("CircleShape2D_7g3yk")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(36, 0)
+shape = SubResource("RectangleShape2D_mgo3m")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-36, 0)
+shape = SubResource("RectangleShape2D_mgo3m")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_d4bi0")
