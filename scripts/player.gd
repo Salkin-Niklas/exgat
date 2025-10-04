@@ -55,12 +55,11 @@ func _physics_process(delta: float) -> void:
 			#print(damage)
 			#health-= damage
 			#health_changed.emit(health)
-
+	
 	if Input.is_key_pressed(KEY_SPACE):
 		$Tractor.monitoring = true
 	else:
 		$Tractor.monitoring = false
-	
 	if $Tractor.monitoring == true:
 		for d in trapped_debris:
 			var force: Vector2 = Vector2(0,0)
