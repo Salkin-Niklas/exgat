@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://brmeikc54gphp"]
+[gd_scene load_steps=5 format=3 uid="uid://brmeikc54gphp"]
 
 [ext_resource type="PackedScene" uid="uid://cpanwsqsc672a" path="res://scenes/player.tscn" id="1_ryjsw"]
 [ext_resource type="PackedScene" uid="uid://r5qgx22kvmim" path="res://scenes/scrap_satellite1.tscn" id="2_pcu7d"]
 [ext_resource type="PackedScene" uid="uid://8i80sac37yyb" path="res://scenes/scrap_satellite2.tscn" id="3_l6grw"]
+[ext_resource type="PackedScene" uid="uid://dg64ejha44oc7" path="res://scenes/scrap1.tscn" id="4_3dx25"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,3 +16,7 @@ gravity_scale = 0.0
 
 [node name="Node2D2" parent="." instance=ExtResource("3_l6grw")]
 position = Vector2(297, 303)
+
+[node name="Node2D3" parent="." instance=ExtResource("4_3dx25")]
+position = Vector2(741, 241)
+gravity_scale = 0.0

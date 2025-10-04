@@ -79,7 +79,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 14.0
+radius = 12.0
 height = 58.0
 
 [node name="Player" type="CharacterBody2D"]
@@ -97,7 +97,6 @@ animation = &"idle"
 limit_enabled = false
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="HitEffectTimeout" type="Timer" parent="."]

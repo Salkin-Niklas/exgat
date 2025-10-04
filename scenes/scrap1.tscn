@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg64ejha44oc7"]
+
+[ext_resource type="Texture2D" uid="uid://doneq1fchymx5" path="res://assets/scrap/scrap1.png" id="1_d86gc"]
+
+[node name="Node2D" type="RigidBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d86gc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-3, -8, -8, -13, -8, -16, -16, -16, -16, -8, -13, -8, -8, -3, -8, 3, -13, 8, -16, 8, -16, 16, -8, 16, -8, 13, -3, 8, 3, 8, 8, 13, 8, 16, 16, 16, 16, 8, 13, 8, 8, 3, 8, -3, 13, -8, 16, -8, 16, -16, 8, -16, 8, -13, 3, -8)

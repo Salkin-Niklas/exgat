@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxtssns1bg2yp"]
+
+[ext_resource type="Texture2D" uid="uid://yltrccd0nl47" path="res://assets/scrap/antenna.png" id="1_1yx6w"]
+
+[node name="Node2D" type="RigidBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1yx6w")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4, -4, -12, -4, -12, -12, -4, -12, -4, -20, 4, -20, 4, -12, 12, -12, 12, -4, 4, -4, 4, 4, 12, 4, 12, 12, 4, 12, 4, 20, -4, 20, -4, 12, -12, 12, -12, 4, -4, 4)
