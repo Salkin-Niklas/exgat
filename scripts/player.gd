@@ -70,7 +70,8 @@ func _physics_process(delta: float) -> void:
 			d.apply_central_force(force)
 		print(velocity)
 
-	var trail_pos = to_global(Vector2(0,25))
+	var trail_pos   = to_global(Vector2(18,25))
+	var trail_pos_2 = to_global(Vector2(-18,25))
 	# Calculate the distance from the last point to the current mouse position
 	if line2d.get_point_count() > 0:
 		var last_point = line2d.get_point_position(line2d.get_point_count() - 1)
@@ -81,10 +82,10 @@ func _physics_process(delta: float) -> void:
 	# Add a new point if the accumulated distance exceeds the spacing
 	if distance_accum >= trail_point_spacing:
 		line2d.add_point(trail_pos)
-		line2d2.add_point(trail_pos)
+		line2d2.add_point(trail_pos_2)
 		distance_accum = 0.0
 		# Remove the oldest point if we exceed the max number of points
-		if line2d.get_point_count() > trail_max_points/2:
+		if line2d.get_point_count() > trail_max_points:
 			line2d.remove_point(0)
 		if line2d2.get_point_count() > trail_max_points:
 			line2d2.remove_point(0)
