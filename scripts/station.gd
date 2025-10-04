@@ -14,7 +14,7 @@ func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int
 	#var other_shape_owner = body.shape_find_owner(body_shape_index)
 	#var other_shape_node = body.shape_owner_get_owner(other_shape_owner)
 	#other_shape_node.get_parent().destroy()
-	if body is CharacterBody2D:
+	if body is not RigidBody2D:
 		return
 	body.queue_free()
 

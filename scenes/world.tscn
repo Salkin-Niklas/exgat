@@ -7,7 +7,9 @@
 [ext_resource type="Script" path="res://scripts/scrap_spawner.gd" id="4_k0juu"]
 [ext_resource type="Texture2D" uid="uid://cnn3v2fltfy3v" path="res://assets/background/stars1.png" id="5_71j4m"]
 [ext_resource type="PackedScene" path="res://scenes/scrap_satellite2.tscn" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://6ja5jmfuopwo" path="res://scenes/collection_area.tscn" id="6_e3hyu"]
 [ext_resource type="AudioStream" uid="uid://csw41083hmrb3" path="res://assets/music/Spacejam(nur_Drums).mp3" id="8_4mrxx"]
+[ext_resource type="Script" uid="uid://drv6q67vdktv5" path="res://scripts/points.gd" id="8_e3hyu"]
 [ext_resource type="Shader" uid="uid://5ae6j0iot63s" path="res://shaders/world_pp.gdshader" id="8_w7kh3"]
 [ext_resource type="AudioStream" uid="uid://bjcm7ua65nim2" path="res://assets/music/Spacejam(ohne_Drums).mp3" id="9_7r4gi"]
 [ext_resource type="Texture2D" uid="uid://b8ixrqxgy0ucu" path="res://icon.svg" id="9_e3hyu"]
@@ -51,6 +53,9 @@ repeat_times = 3
 [node name="Sprite2D" type="Sprite2D" parent="Game/Parallax2D2"]
 texture = ExtResource("3_qfnet")
 
+[node name="Node2D" parent="Game" instance=ExtResource("6_e3hyu")]
+position = Vector2(-129, -662)
+
 [node name="Station" parent="Game" instance=ExtResource("2_rwgxs")]
 
 [node name="Trail" type="Line2D" parent="Game"]
@@ -78,11 +83,8 @@ trail_point_spacing = 5.0
 script = ExtResource("4_k0juu")
 
 [node name="Timer" type="Timer" parent="Game/ScrapSpawner"]
-one_shot = true
+wait_time = 5.0
 autostart = true
-
-[node name="Node2D" parent="Game" instance=ExtResource("7_i7141")]
-position = Vector2(248, -409)
 
 [node name="Postprocessing" type="CanvasLayer" parent="Game"]
 
@@ -160,6 +162,25 @@ texture = ExtResource("9_e3hyu")
 [node name="Sprite2D2" type="Sprite2D" parent="GUI/station_direction"]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("9_e3hyu")
+[node name="Score" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="GUI/Score"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.57500005
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("8_e3hyu")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -173,3 +194,6 @@ stream = ExtResource("9_7r4gi")
 volume_db = 8.588
 autoplay = true
 parameters/looping = true
+
+[connection signal="on_score" from="Game/ScrapSpawner" to="GUI/Score/Label" method="_on_scrap_spawner_on_score"]
+[connection signal="timeout" from="Game/ScrapSpawner/Timer" to="Game/ScrapSpawner" method="_on_timer_timeout"]

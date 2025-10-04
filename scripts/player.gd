@@ -23,8 +23,11 @@ var distance_accum: float = 0.0
 func _physics_process(delta: float) -> void:
 	var base: String = "idle"
 	if Input.is_action_pressed("Boost"):
-		velocity.x += BOOST_FORCE*delta * sin(rotation)
-		velocity.y -= BOOST_FORCE*delta * cos(rotation)
+		const break_boost: float = 0
+		#var break_boost: float = (get_angle_to(to_global(velocity)))/PI * 100
+		#if velocity.length() < 10: break_boost = 0
+		velocity.x += (BOOST_FORCE+break_boost)*delta * sin(rotation)
+		velocity.y -= (BOOST_FORCE+break_boost)*delta * cos(rotation)
 		base = "boost"
 	if Input.is_action_pressed("TurnL"):
 		rotation -= TURNING_SPEED*delta
@@ -32,6 +35,8 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_pressed("TurnR"):
 		rotation += TURNING_SPEED*delta
 		base += "L"
+		
+	$eninge_sound.stream_paused = base == "idle"
 		
 	move_and_slide()
 	if randi() % 2 == 0:
@@ -55,8 +60,8 @@ func _physics_process(delta: float) -> void:
 			#print(damage)
 			#health-= damage
 			#health_changed.emit(health)
-	
-	if Input.is_key_pressed(KEY_SPACE):
+
+	if Input.is_action_pressed("TractorBeam"):
 		$Tractor.monitoring = true
 	else:
 		$Tractor.monitoring = false

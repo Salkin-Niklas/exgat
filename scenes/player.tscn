@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpanwsqsc672a"]
+[gd_scene load_steps=13 format=3 uid="uid://cpanwsqsc672a"]
 
 [ext_resource type="Texture2D" uid="uid://b2i7vafpaompu" path="res://assets/player/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dlrrsreh8dfr2" path="res://scripts/player.gd" id="2_g2els"]
+[ext_resource type="AudioStream" uid="uid://cbme5n241lsrs" path="res://sfx/sfx_Wuschhhh1.mp3" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -114,9 +115,16 @@ monitorable = false
 shape = SubResource("ConvexPolygonShape2D_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tractor"]
+visible = false
 
 [node name="Line2D" type="Line2D" parent="."]
 default_color = Color(0.22352941, 0.46666667, 0.5294118, 1)
+
+[node name="eninge_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qhqgy")
+volume_db = -2.863
+autoplay = true
+parameters/looping = true
 
 [connection signal="timeout" from="HitEffectTimeout" to="." method="_on_hit_effect_timeout_timeout"]
 [connection signal="body_entered" from="Tractor" to="." method="_on_tractor_body_entered"]
