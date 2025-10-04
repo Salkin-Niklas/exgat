@@ -16,9 +16,10 @@ script = ExtResource("1_4wyf3")
 [node name="Game" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="Player" parent="Game" instance=ExtResource("1_nnsk1")]
-
 [node name="Station" parent="Game" instance=ExtResource("2_rwgxs")]
+
+[node name="Player" parent="Game" instance=ExtResource("1_nnsk1")]
+position = Vector2(424, 272)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 

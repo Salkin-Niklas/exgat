@@ -8,8 +8,8 @@ signal gameover()
 func _process(_delta: float) -> void:
 	if health<=0:
 		emit_signal("gameover")
-	$Sprite2D.texture = preload("res://assets/station/station.png")
-	$Sprite2D.hide()
+		$Sprite2D.texture = preload("res://assets/station/station.png")
+		$Sprite2D.hide()
 
 func _on_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
