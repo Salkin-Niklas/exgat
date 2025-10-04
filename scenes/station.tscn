@@ -48,4 +48,4 @@ shape = SubResource("RectangleShape2D_7hcop")
 texture = ExtResource("3_csis4")
 offset = Vector2(8, 0)
 
-[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

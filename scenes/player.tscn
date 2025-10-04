@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpanwsqsc672a"]
+[gd_scene load_steps=12 format=3 uid="uid://cpanwsqsc672a"]
 
 [ext_resource type="Texture2D" uid="uid://b2i7vafpaompu" path="res://assets/player/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dlrrsreh8dfr2" path="res://scripts/player.gd" id="2_g2els"]
@@ -82,6 +82,9 @@ animations = [{
 radius = 14.0
 height = 58.0
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_g2els"]
+points = PackedVector2Array(-4, -30, -30, -85, -20, -103, 0, -112, 20, -103, 30, -85, 4, -30)
+
 [node name="Player" type="CharacterBody2D"]
 floor_stop_on_slope = false
 floor_block_on_wall = false
@@ -104,4 +107,15 @@ shape = SubResource("CapsuleShape2D_g2els")
 wait_time = 0.1
 one_shot = true
 
+[node name="Tractor" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tractor"]
+shape = SubResource("ConvexPolygonShape2D_g2els")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tractor"]
+
 [connection signal="timeout" from="HitEffectTimeout" to="." method="_on_hit_effect_timeout_timeout"]
+[connection signal="body_entered" from="Tractor" to="." method="_on_tractor_body_entered"]
+[connection signal="body_exited" from="Tractor" to="." method="_on_tractor_body_exited"]
