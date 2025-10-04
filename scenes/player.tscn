@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpanwsqsc672a"]
+[gd_scene load_steps=11 format=3 uid="uid://cpanwsqsc672a"]
 
 [ext_resource type="Texture2D" uid="uid://b2i7vafpaompu" path="res://assets/player/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dlrrsreh8dfr2" path="res://scripts/player.gd" id="2_g2els"]
@@ -78,7 +78,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="AnimatedSprite2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 14.0
+height = 58.0
+
+[node name="Player" type="CharacterBody2D"]
+floor_stop_on_slope = false
+floor_block_on_wall = false
+platform_floor_layers = 4294967040
+script = ExtResource("2_g2els")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 23)
 sprite_frames = SubResource("SpriteFrames_fjrip")
 animation = &"idle"
-script = ExtResource("2_g2els")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_enabled = false
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_g2els")
+
+[node name="HitEffectTimeout" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="HitEffectTimeout" to="." method="_on_hit_effect_timeout_timeout"]
