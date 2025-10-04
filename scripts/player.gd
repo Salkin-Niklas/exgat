@@ -4,11 +4,21 @@ const TURNING_SPEED: float = 1.6
 const FRICTION: float = 0.1 # TODO implement ?
 const BOOST_FORCE: float = 100
 
+
 var health: float = 100.0
 
 var trapped_debris: Array[RigidBody2D] = []
 
-signal health_changed(health: int)
+@export var line2d: Line2D
+@export var line2d2: Line2D
+# Maximum number of points in the trail
+@export var trail_max_points: int = 10
+# Distance between points
+@export var trail_point_spacing: float = 1
+# Used to control the spacing between trail points
+var distance_accum: float = 0.0
+
+#signal health_changed(health: int)
 
 func _physics_process(delta: float) -> void:
 	var base: String = "idle"
@@ -60,11 +70,28 @@ func _physics_process(delta: float) -> void:
 			d.apply_central_force(force)
 		print(velocity)
 
+	var trail_pos = to_global(Vector2(0,25))
+	# Calculate the distance from the last point to the current mouse position
+	if line2d.get_point_count() > 0:
+		var last_point = line2d.get_point_position(line2d.get_point_count() - 1)
+		var distance = trail_pos.distance_to(last_point)
+		distance_accum += distance
+	else:
+		distance_accum = trail_point_spacing # Ensure the first point is added
+	# Add a new point if the accumulated distance exceeds the spacing
+	if distance_accum >= trail_point_spacing:
+		line2d.add_point(trail_pos)
+		line2d2.add_point(trail_pos)
+		distance_accum = 0.0
+		# Remove the oldest point if we exceed the max number of points
+		if line2d.get_point_count() > trail_max_points/2:
+			line2d.remove_point(0)
+		if line2d2.get_point_count() > trail_max_points:
+			line2d2.remove_point(0)
 
 
 func _on_hit_effect_timeout_timeout() -> void:
 	$Sprite.modulate = Color(1,1,1)
-
 
 func _on_tractor_body_entered(body: Node2D) -> void:
 	print(body)
@@ -75,3 +102,16 @@ func _on_tractor_body_entered(body: Node2D) -> void:
 func _on_tractor_body_exited(body: Node2D) -> void:
 	if body is RigidBody2D:
 		trapped_debris.erase(body)
+		
+func _ready():
+	if line2d == null:
+		print("Error: line2d is not assigned. Please assign it in the editor.")
+		return
+	# Ensure the line2d node is empty at the start
+	line2d.clear_points()
+	
+# Optionally, you can reset the trail
+func reset_trail():
+	if line2d != null:
+		line2d.clear_points()
+		distance_accum = 0.0

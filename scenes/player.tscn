@@ -114,6 +114,9 @@ monitorable = false
 shape = SubResource("ConvexPolygonShape2D_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tractor"]
+[node name="Line2D" type="Line2D" parent="."]
+default_color = Color(0.22352941, 0.46666667, 0.5294118, 1)
+
 
 [connection signal="timeout" from="HitEffectTimeout" to="." method="_on_hit_effect_timeout_timeout"]
 [connection signal="body_entered" from="Tractor" to="." method="_on_tractor_body_entered"]

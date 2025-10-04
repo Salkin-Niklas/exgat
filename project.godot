@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="exgat"
-run/main_scene="uid://brmeikc54gphp"
+run/main_scene="uid://cauqma237b67i"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cauqma237b67i"]
+[gd_scene load_steps=9 format=3 uid="uid://cauqma237b67i"]
 
-[ext_resource type="Script" uid="uid://bk3krcfphvl38" path="res://scripts/world.gd" id="1_4wyf3"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cpanwsqsc672a" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://dq1252xoyga2v" path="res://scenes/station.tscn" id="2_rwgxs"]
+[ext_resource type="Texture2D" uid="uid://cmsrjkopar8av" path="res://assets/background/stars2.png" id="3_qfnet"]
+[ext_resource type="Script" uid="uid://3sdulbrfx4xv" path="res://scripts/scrap_spawner.gd" id="4_k0juu"]
+[ext_resource type="Texture2D" uid="uid://cnn3v2fltfy3v" path="res://assets/background/stars1.png" id="5_71j4m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4wyf3"]
 line_spacing = 0.0
@@ -16,10 +19,58 @@ script = ExtResource("1_4wyf3")
 [node name="Game" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
+[node name="Parallax2D" type="Parallax2D" parent="Game"]
+scroll_scale = Vector2(0.6, 0.6)
+scroll_offset = Vector2(-337, 117)
+repeat_size = Vector2(1024, 1024)
+repeat_times = 3
+
+[node name="ColorRect" type="ColorRect" parent="Game/Parallax2D"]
+offset_left = -512.0
+offset_top = -512.0
+offset_right = 512.0
+offset_bottom = 512.0
+color = Color(0.047058824, 0, 0.14117648, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Game/Parallax2D"]
+texture = ExtResource("5_71j4m")
+
+[node name="Parallax2D2" type="Parallax2D" parent="Game"]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(1024, 1024)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Game/Parallax2D2"]
+texture = ExtResource("3_qfnet")
+
 [node name="Station" parent="Game" instance=ExtResource("2_rwgxs")]
 
-[node name="Player" parent="Game" instance=ExtResource("1_nnsk1")]
-position = Vector2(424, 272)
+[node name="Player" parent="Game" node_paths=PackedStringArray("line2d", "line2d2") instance=ExtResource("1_nnsk1")]
+line2d = NodePath("../Trail")
+line2d2 = NodePath("../Trail2")
+trail_max_points = 30
+trail_point_spacing = 5.0
+
+[node name="Trail" type="Line2D" parent="Game"]
+width = 5.0
+default_color = Color(0.22352941, 0.46666667, 0.5294118, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Trail2" type="Line2D" parent="Game"]
+width = 2.0
+default_color = Color(0.22352941, 0.46666667, 0.5294118, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="ScrapSpawner" type="Node2D" parent="Game"]
+script = ExtResource("4_k0juu")
+
+[node name="Timer" type="Timer" parent="Game/ScrapSpawner"]
+one_shot = true
+autostart = true
 
 [node name="GUI" type="CanvasLayer" parent="."]
 

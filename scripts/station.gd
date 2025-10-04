@@ -1,6 +1,6 @@
 extends Area2D
 
-var health: float = 0
+var health: float = 5
 
 signal gameover()
 
