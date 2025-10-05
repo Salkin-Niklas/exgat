@@ -249,9 +249,14 @@ scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="GUI/station_direction"]
 texture = ExtResource("9_jhx03")
-offset = Vector2(0, 12)
+offset = Vector2(0, 200)
 
-[node name="Sprite2D2" type="Sprite2D" parent="GUI/station_direction"]
+[node name="Control" type="Control" parent="GUI/station_direction"]
+anchors_preset = 0
+offset_top = 188.0
+offset_bottom = 188.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="GUI/station_direction/Control"]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("10_o8fc1")
 
