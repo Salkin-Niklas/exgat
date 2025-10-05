@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckckkb055dg3t"
-path="res://.godot/imported/station_waypoint.png-09e03121673e749c318e3312251c6f4e.ctex"
+uid="uid://cwmjkeivhcb6y"
+path="res://.godot/imported/beacon.png-dbe13ce0321716b1b240b85435bcc7c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/station_waypoint.png"
-dest_files=["res://.godot/imported/station_waypoint.png-09e03121673e749c318e3312251c6f4e.ctex"]
+source_file="res://assets/collection/beacon.png"
+dest_files=["res://.godot/imported/beacon.png-dbe13ce0321716b1b240b85435bcc7c1.ctex"]
 
 [params]
 

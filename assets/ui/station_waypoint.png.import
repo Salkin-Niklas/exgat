@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bci2i4h7vuhuv"
-path="res://.godot/imported/station_icon.png-8d5e7ae19e6b05e0318bc9022263025a.ctex"
+uid="uid://ckckkb055dg3t"
+path="res://.godot/imported/station_waypoint.png-b2b956e84206da2e5fcb5b1246314502.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/station_icon.png"
-dest_files=["res://.godot/imported/station_icon.png-8d5e7ae19e6b05e0318bc9022263025a.ctex"]
+source_file="res://assets/ui/station_waypoint.png"
+dest_files=["res://.godot/imported/station_waypoint.png-b2b956e84206da2e5fcb5b1246314502.ctex"]
 
 [params]
 

@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfcjwn8yjflys"]
+
+[ext_resource type="Script" uid="uid://ck0gtqc2eilct" path="res://scripts/collection_net.gd" id="1_4slge"]
+[ext_resource type="SpriteFrames" uid="uid://drv5t66sru22" path="res://assets/collection/beacon_frames.tres" id="2_mil3k"]
+
+[sub_resource type="Curve" id="Curve_mil3k"]
+_data = [Vector2(0, 0), 0.0, 2.7830598, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.8331254, 0.0, 0, 0]
+point_count = 3
+
+[node name="Net" type="Area2D"]
+scale = Vector2(8, 8)
+script = ExtResource("1_4slge")
+n1 = Vector2(20, 20)
+n2 = Vector2(40, 25)
+n3 = Vector2(36, 40)
+n4 = Vector2(21, 40)
+curve = SubResource("Curve_mil3k")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+z_index = -1
+
+[node name="Line_outer" type="Line2D" parent="."]
+points = PackedVector2Array(6.375, -0.375)
+width = 1.0
+default_color = Color(0.08627451, 0.28235295, 0.33333334, 1)
+
+[node name="N1" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_mil3k")
+autoplay = "default"
+offset = Vector2(0, -1)
+
+[node name="N2" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_mil3k")
+autoplay = "default"
+offset = Vector2(0, -1)
+
+[node name="N3" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_mil3k")
+autoplay = "default"
+offset = Vector2(0, -1)
+
+[node name="N4" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_mil3k")
+autoplay = "default"
+frame_progress = 0.63561934
+offset = Vector2(0, -1)

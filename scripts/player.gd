@@ -19,6 +19,7 @@ var trapped_debris: Array[RigidBody2D] = []
 var distance_accum: float = 0.0
 
 signal health_changed(health: int)
+signal pause_requested()
 
 func _physics_process(delta: float) -> void:
 	var base: String = "idle"
@@ -35,6 +36,10 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_pressed("TurnR"):
 		rotation += TURNING_SPEED*delta
 		base += "L"
+		
+	if Input.is_key_pressed(KEY_ESCAPE):
+		$"../../GUI/InitHud".show()
+		pause_requested.emit()
 		
 	$eninge_sound.stream_paused = base == "idle"
 		

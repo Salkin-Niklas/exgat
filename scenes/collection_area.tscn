@@ -1,23 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://6ja5jmfuopwo"]
 
 [ext_resource type="Script" uid="uid://biustfqt32mhv" path="res://scripts/collection_area.gd" id="1_jfbh3"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_117s0"]
-size = Vector2(188, 175)
+[ext_resource type="PackedScene" uid="uid://cfcjwn8yjflys" path="res://scenes/collection_net.tscn" id="2_2eubv"]
 
 [sub_resource type="SystemFont" id="SystemFont_jfbh3"]
 
-[node name="Node2D" type="Area2D"]
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_jfbh3")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 256.0
-offset_bottom = 234.0
-color = Color(0.08627451, 0.28235295, 0.33333334, 0.3647059)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(127, 118.5)
-shape = SubResource("RectangleShape2D_117s0")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 67.0
@@ -34,5 +23,10 @@ horizontal_alignment = 1
 wait_time = 30.0
 autostart = true
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Net" parent="." instance=ExtResource("2_2eubv")]
+
+[node name="BeaconTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="BeaconTimer" to="." method="_on_beacon_timer_timeout"]

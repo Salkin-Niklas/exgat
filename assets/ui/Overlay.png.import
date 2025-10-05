@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jha1do8p554t"
-path="res://.godot/imported/health_station.png-f97e957ec717c4152f65d879a5dad234.ctex"
+uid="uid://u2d0peyl7bna"
+path="res://.godot/imported/Overlay.png-f63e8c7cdebf945318c68a3091fe9865.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/health_station.png"
-dest_files=["res://.godot/imported/health_station.png-f97e957ec717c4152f65d879a5dad234.ctex"]
+source_file="res://assets/ui/Overlay.png"
+dest_files=["res://.godot/imported/Overlay.png-f63e8c7cdebf945318c68a3091fe9865.ctex"]
 
 [params]
 
