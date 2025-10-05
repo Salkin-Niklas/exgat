@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cfcjwn8yjflys" path="res://scenes/collection_net.tscn" id="2_2eubv"]
 
 [sub_resource type="SystemFont" id="SystemFont_jfbh3"]
+subpixel_positioning = 0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_jfbh3")
@@ -29,4 +30,5 @@ autostart = true
 wait_time = 0.25
 autostart = true
 
+[connection signal="body_entered" from="Net" to="." method="_on_net_body_entered"]
 [connection signal="timeout" from="BeaconTimer" to="." method="_on_beacon_timer_timeout"]

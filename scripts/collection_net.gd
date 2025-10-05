@@ -10,11 +10,13 @@ extends Area2D
 @export var mesh_points: int = 5
 
 func update(line_points: int = 23)->void:
-	$CollisionPolygon2D.polygon = PackedVector2Array([n1,n2,n3,n4])
+	$CollisionPolygon2D.set_polygon(PackedVector2Array([n1,n2,n3,n4]))
+	
+	#await $CollisionPolygon2D.item_rect_changed
 	$N1.position = n1
 	$N2.position = n2
 	$N3.position = n3
-	$N4.position = n3
+	$N4.position = n4
 	$Line_outer.clear_points()
 	var dist: float = 1./mesh_points
 	
@@ -57,3 +59,7 @@ func update(line_points: int = 23)->void:
 			line_points -= 1
 			if line_points < 1: return
 			$Line_outer.add_point(lerp(n,ng,dist*j)+Vector2(0,curve_gravity*curve.sample(dist*j)))
+
+
+func _on_body_entered(_body: Node2D) -> void:
+	print("Body entered net!")

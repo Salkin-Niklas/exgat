@@ -25,15 +25,15 @@ var h: float = 0
 
 func  _process(delta: float) -> void:
 	if is_translating < 4:
-		if is_translating > 0:
-			$Net.n1 = goal_n1#($Net.n1-goal_n1).normalized() * delta
-		if is_translating > 1:
-			$Net.n2 = goal_n2#($Net.n2-goal_n2).normalized() * delta
-		if is_translating > 2:
-			$Net.n3 = goal_n3#($Net.n3-goal_n3).normalized() * delta
-		if is_translating > 3:
-			$Net.n4 = goal_n4#($Net.n4-goal_n4).normalized() * delta
-		if $Net.n1 == goal_n1 and $Net.n2 == goal_n2 and $Net.n3 == goal_n3 and $Net.n4 == goal_n4:
+		if is_translating >= 0 and not round($Net.n1) == round(goal_n1):
+			$Net.n1 = $Net.n1-(($Net.n1-goal_n1).normalized() * delta * BEACON_SPEED).limit_length(min(($Net.n1-goal_n1).length(), BEACON_SPEED))
+		if is_translating >= 1 and not round($Net.n2) == round(goal_n2):
+			$Net.n2 = $Net.n2-(($Net.n2-goal_n2).normalized() * delta * BEACON_SPEED).limit_length(min(($Net.n2-goal_n2).length(), BEACON_SPEED))
+		if is_translating >= 2 and not round($Net.n3) == round(goal_n3):
+			$Net.n3 = $Net.n3-(($Net.n3-goal_n3).normalized() * delta * BEACON_SPEED).limit_length(min(($Net.n3-goal_n3).length(), BEACON_SPEED))
+		if is_translating >= 3 and not round($Net.n4) == round(goal_n4):
+			$Net.n4 = $Net.n4-(($Net.n4-goal_n4).normalized() * delta * BEACON_SPEED).limit_length(min(($Net.n4-goal_n4).length(), BEACON_SPEED))
+		if round($Net.n1) == round(goal_n1) and round($Net.n2) == round(goal_n2) and round($Net.n3) == round(goal_n3) and round($Net.n4) == round(goal_n4):
 			is_translating += 1
 		$Net.update(0)
 	else:
@@ -41,5 +41,12 @@ func  _process(delta: float) -> void:
 		$Net.update(int(h*20))
 
 func _on_beacon_timer_timeout() -> void:
-	if is_translating >= 0 and is_translating < 5:
+	if is_translating >= 0 and is_translating < 3:
 		is_translating += 1
+
+
+func _on_net_body_entered(body: Node2D) -> void:
+	if body is RigidBody2D:
+		print("Scrap entered Net")
+		body.linear_damp_mode = RigidBody2D.DAMP_MODE_COMBINE
+		body.linear_damp = 0.4
