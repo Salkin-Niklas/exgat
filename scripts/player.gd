@@ -3,7 +3,7 @@ extends CharacterBody2D
 const TURNING_SPEED: float = 1.6
 const FRICTION: float = 0.1 # TODO implement ?
 const BOOST_FORCE: float = 100
-
+const BREAK_FORCE: float = 150
 
 var health: float = 100.0
 
@@ -18,14 +18,14 @@ var trapped_debris: Array[RigidBody2D] = []
 # Used to control the spacing between trail points
 var distance_accum: float = 0.0
 
-#signal health_changed(health: int)
+signal health_changed(health: int)
 
 func _physics_process(delta: float) -> void:
 	var base: String = "idle"
 	if Input.is_action_pressed("Boost"):
-		const break_boost: float = 0
-		#var break_boost: float = (get_angle_to(to_global(velocity)))/PI * 100
-		#if velocity.length() < 10: break_boost = 0
+		var normal = Vector2(cos(rotation+PI/2), sin(rotation+PI/2))
+		var break_boost = (normal.dot(velocity.normalized()) + 1) * BREAK_FORCE / 2
+		#print(normal.dot(velocity.normalized()))
 		velocity.x += (BOOST_FORCE+break_boost)*delta * sin(rotation)
 		velocity.y -= (BOOST_FORCE+break_boost)*delta * cos(rotation)
 		base = "boost"
@@ -43,36 +43,42 @@ func _physics_process(delta: float) -> void:
 		$Sprite.animation = base
 	else: $Sprite.animation = "idle"
 	
-	## after calling move_and_slide()
-	#for i in get_slide_collision_count():
-		#var c := get_slide_collision(i)
-		#if c.get_collider() is RigidBody2D:
-			##var impulse: Vector2 = Vector2(sin(rotation), -cos(rotation))#-c.get_normal()/Vector2(sin(rotation), cos(rotation)) #* velocity.length()/10
+	# after calling move_and_slide()
+	for i in get_slide_collision_count():
+		var c := get_slide_collision(i)
+		if c.get_collider() is RigidBody2D:
+			#var impulse: Vector2 = Vector2(sin(rotation), -cos(rotation))#-c.get_normal()/Vector2(sin(rotation), cos(rotation)) #* velocity.length()/10
 			##impulse 
-			##c.get_collider().apply_impulse(impulse, c.get_position())
+			#c.get_collider().apply_impulse(impulse, c.get_position())
 			###if impulse.length() > 10 and $HitEffectTimeout.is_stopped():
-			##$HitEffectTimeout.start()
-			##$Sprite.modulate = Color(2,2,2)
-			#
-			#var damage: float = abs(c.get_collider().linear_velocity.dot(c.get_normal())) + abs(self.velocity.dot(c.get_normal()))
-			#if damage < 5.0:
-				#damage = 0.0
+			
+			var damage: float = abs(c.get_collider().linear_velocity.dot(c.get_normal())) + abs(self.velocity.dot(c.get_normal())) / 5
+			print("damaged by ", damage)
+			if damage < 5.0 or not $HitEffectTimeout.is_stopped():
+				damage = 0.0
+			else:
+				$HitEffectTimeout.start()
+				$Sprite.modulate = Color(2,2,2)
 			#print(damage)
-			#health-= damage
-			#health_changed.emit(health)
+			health-= damage
+			health_changed.emit(health/25)
 
 	if Input.is_action_pressed("TractorBeam"):
 		$Tractor.monitoring = true
+		$beam_sound.stream_paused = false
+		$Tractor.show()
 	else:
 		$Tractor.monitoring = false
+		$beam_sound.stream_paused = true
+		$Tractor.hide()
 	if $Tractor.monitoring == true:
 		for d in trapped_debris:
 			var force: Vector2 = Vector2(0,0)
 			force -= (d.global_position-(global_position+Vector2(0,-85).rotated(rotation)))*10
 			force -= (d.linear_velocity-velocity)*100
-			print(d.linear_velocity)
+			#print(d.linear_velocity)
 			d.apply_central_force(force)
-		print(velocity)
+		#print(velocity)
 
 	var trail_pos   = to_global(Vector2(18,25))
 	var trail_pos_2 = to_global(Vector2(-18,25))
@@ -109,6 +115,7 @@ func _on_tractor_body_exited(body: Node2D) -> void:
 		trapped_debris.erase(body)
 		
 func _ready():
+	$beam_sound.stream_paused = true
 	if line2d == null:
 		print("Error: line2d is not assigned. Please assign it in the editor.")
 		return

@@ -35,7 +35,7 @@ func create_scrap()->void:
 	print("Scrap added at ", new_scrap.position)
 
 func _on_timer_timeout() -> void:
-	$Timer.wait_time = max($Timer.wait_time-0.05, 0.5)
+	$Timer.wait_time = max($Timer.wait_time-0.01, 0.5)
 	create_scrap()
 
 func score(pts: int):

@@ -1,27 +1,154 @@
-[gd_scene load_steps=15 format=3 uid="uid://cauqma237b67i"]
+[gd_scene load_steps=32 format=3 uid="uid://cauqma237b67i"]
 
 [ext_resource type="Script" uid="uid://bk3krcfphvl38" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cpanwsqsc672a" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://dq1252xoyga2v" path="res://scenes/station.tscn" id="2_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://cmsrjkopar8av" path="res://assets/background/stars2.png" id="3_qfnet"]
-[ext_resource type="Script" path="res://scripts/scrap_spawner.gd" id="4_k0juu"]
+[ext_resource type="Script" uid="uid://3sdulbrfx4xv" path="res://scripts/scrap_spawner.gd" id="4_k0juu"]
 [ext_resource type="Texture2D" uid="uid://cnn3v2fltfy3v" path="res://assets/background/stars1.png" id="5_71j4m"]
-[ext_resource type="PackedScene" path="res://scenes/scrap_satellite2.tscn" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://6ja5jmfuopwo" path="res://scenes/collection_area.tscn" id="6_e3hyu"]
 [ext_resource type="AudioStream" uid="uid://csw41083hmrb3" path="res://assets/music/Spacejam(nur_Drums).mp3" id="8_4mrxx"]
 [ext_resource type="Script" uid="uid://drv6q67vdktv5" path="res://scripts/points.gd" id="8_e3hyu"]
 [ext_resource type="Shader" uid="uid://5ae6j0iot63s" path="res://shaders/world_pp.gdshader" id="8_w7kh3"]
 [ext_resource type="AudioStream" uid="uid://bjcm7ua65nim2" path="res://assets/music/Spacejam(ohne_Drums).mp3" id="9_7r4gi"]
-[ext_resource type="Texture2D" uid="uid://b8ixrqxgy0ucu" path="res://icon.svg" id="9_e3hyu"]
+[ext_resource type="Texture2D" uid="uid://ckckkb055dg3t" path="res://assets/player/station_waypoint.png" id="9_jhx03"]
+[ext_resource type="Texture2D" uid="uid://cqod6w3g1euni" path="res://assets/player/health.png" id="9_o8fc1"]
+[ext_resource type="Texture2D" uid="uid://bci2i4h7vuhuv" path="res://assets/player/station_icon.png" id="10_o8fc1"]
+[ext_resource type="Script" uid="uid://dirjp8y3ycjuo" path="res://scripts/gui_health.gd" id="10_xo05s"]
+[ext_resource type="Texture2D" uid="uid://jha1do8p554t" path="res://assets/player/health_station.png" id="11_dss4m"]
+[ext_resource type="Script" uid="uid://coydg7ujsh44y" path="res://scripts/gui_station_health.gd" id="14_7t5mc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e3hyu"]
 shader = ExtResource("8_w7kh3")
 
-[sub_resource type="LabelSettings" id="LabelSettings_4wyf3"]
-line_spacing = 0.0
-
 [sub_resource type="LabelSettings" id="LabelSettings_k0juu"]
 font_size = 35
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lf6f"]
+atlas = ExtResource("11_dss4m")
+region = Rect2(0, 160, 296, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iits"]
+atlas = ExtResource("11_dss4m")
+region = Rect2(0, 120, 296, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oo54l"]
+atlas = ExtResource("11_dss4m")
+region = Rect2(0, 80, 296, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpybi"]
+atlas = ExtResource("11_dss4m")
+region = Rect2(0, 40, 296, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctatt"]
+atlas = ExtResource("11_dss4m")
+region = Rect2(0, 0, 296, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2lf6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lf6f")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iits")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oo54l")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpybi")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctatt")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xo05s"]
+atlas = ExtResource("9_o8fc1")
+region = Rect2(0, 160, 296, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dss4m"]
+atlas = ExtResource("9_o8fc1")
+region = Rect2(0, 120, 296, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7t5mc"]
+atlas = ExtResource("9_o8fc1")
+region = Rect2(0, 80, 296, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lakw3"]
+atlas = ExtResource("9_o8fc1")
+region = Rect2(0, 40, 296, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm21f"]
+atlas = ExtResource("9_o8fc1")
+region = Rect2(0, 0, 296, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xo05s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xo05s")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dss4m")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7t5mc")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lakw3")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm21f")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_4wyf3")
@@ -99,41 +226,6 @@ grow_vertical = 2
 [node name="GUI" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="healthbar" type="Control" parent="GUI"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 96.0
-offset_top = 576.0
-offset_right = 136.0
-offset_bottom = 616.0
-
-[node name="ProgressBar" type="ProgressBar" parent="GUI/healthbar"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -2.0
-offset_top = -13.5
-offset_right = 172.0
-offset_bottom = 13.5
-grow_horizontal = 2
-grow_vertical = 2
-show_percentage = false
-
-[node name="Label" type="Label" parent="GUI/healthbar/ProgressBar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Integrity"
-label_settings = SubResource("LabelSettings_4wyf3")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="gameover" type="Control" parent="GUI"]
 visible = false
 layout_mode = 3
@@ -157,11 +249,35 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="GUI/station_direction"]
-texture = ExtResource("9_e3hyu")
+texture = ExtResource("9_jhx03")
 
 [node name="Sprite2D2" type="Sprite2D" parent="GUI/station_direction"]
 scale = Vector2(0.7, 0.7)
-texture = ExtResource("9_e3hyu")
+texture = ExtResource("10_o8fc1")
+
+[node name="healthbar" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 61.0
+offset_top = -72.0
+offset_right = 136.0
+offset_bottom = -32.0
+grow_vertical = 0
+
+[node name="health_Station" type="AnimatedSprite2D" parent="GUI/healthbar"]
+position = Vector2(107, -15)
+sprite_frames = SubResource("SpriteFrames_2lf6f")
+animation = &"4"
+script = ExtResource("14_7t5mc")
+
+[node name="health_Player" type="AnimatedSprite2D" parent="GUI/healthbar"]
+position = Vector2(151, -66)
+sprite_frames = SubResource("SpriteFrames_xo05s")
+animation = &"4"
+script = ExtResource("10_xo05s")
+
 [node name="Score" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 5
@@ -195,5 +311,7 @@ volume_db = 8.588
 autoplay = true
 parameters/looping = true
 
+[connection signal="health_changed" from="Game/Station" to="GUI/healthbar/health_Station" method="_on_station_health_changed"]
+[connection signal="health_changed" from="Game/Player" to="GUI/healthbar/health_Player" method="_on_player_health_changed"]
 [connection signal="on_score" from="Game/ScrapSpawner" to="GUI/Score/Label" method="_on_scrap_spawner_on_score"]
 [connection signal="timeout" from="Game/ScrapSpawner/Timer" to="Game/ScrapSpawner" method="_on_timer_timeout"]

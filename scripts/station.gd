@@ -1,8 +1,9 @@
 extends Area2D
 
-var health: float = 5
+var health: float = 4
 
 signal gameover()
+signal health_changed(health: int)
 
 func _process(_delta: float) -> void:
 	if health<=0:
@@ -24,4 +25,5 @@ func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int
 	local_shape_node.get_child(0).hide()
 	local_shape_node.set_deferred("disabled", true)
 	health -= 1
+	health_changed.emit(health)
 	print("station damaged, ", health)

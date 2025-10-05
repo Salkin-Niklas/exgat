@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b2i7vafpaompu" path="res://assets/player/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dlrrsreh8dfr2" path="res://scripts/player.gd" id="2_g2els"]
 [ext_resource type="AudioStream" uid="uid://cbme5n241lsrs" path="res://sfx/sfx_Wuschhhh1.mp3" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://b4hsrt2ak1pem" path="res://sfx/sfx_beam.mp3" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -83,9 +84,6 @@ animations = [{
 radius = 12.0
 height = 58.0
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_g2els"]
-points = PackedVector2Array(-4, -30, -30, -85, -20, -103, 0, -112, 20, -103, 30, -85, 4, -30)
-
 [node name="Player" type="CharacterBody2D"]
 floor_stop_on_slope = false
 floor_block_on_wall = false
@@ -104,15 +102,22 @@ limit_enabled = false
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="HitEffectTimeout" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
 [node name="Tractor" type="Area2D" parent="."]
+visible = false
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tractor"]
-shape = SubResource("ConvexPolygonShape2D_g2els")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Tractor"]
+position = Vector2(-4, -113)
+polygon = PackedVector2Array(0.91784, 81.482864, -33.08216, 3.4828644, -35.08216, -10.517136, -33.08216, -26.517136, -26.08216, -38.517136, -14.08216, -48.517136, -2.08216, -52.517136, 4.91784, -52.517136, 11.917839, -52.517136, 24.91784, -49.517136, 35.91784, -39.517136, 43.91784, -26.517136, 47, -11, 45, 3, 4.91784, 81.482864)
+
+[node name="CollisionShape2D2" type="Polygon2D" parent="Tractor"]
+position = Vector2(-4, -113)
+color = Color(0, 1, 0.19215687, 0.30980393)
+polygon = PackedVector2Array(0.91784, 81.482864, -33.08216, 3.4828644, -35.08216, -10.517136, -33.08216, -26.517136, -26.08216, -38.517136, -14.08216, -48.517136, -2.08216, -52.517136, 4.91784, -52.517136, 11.917839, -52.517136, 24.91784, -49.517136, 35.91784, -39.517136, 43.91784, -26.517136, 47, -11, 45, 3, 4.91784, 81.482864)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tractor"]
 visible = false
@@ -123,6 +128,12 @@ default_color = Color(0.22352941, 0.46666667, 0.5294118, 1)
 [node name="eninge_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_qhqgy")
 volume_db = -2.863
+autoplay = true
+parameters/looping = true
+
+[node name="beam_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dqkch")
+volume_db = 12.403
 autoplay = true
 parameters/looping = true
 
