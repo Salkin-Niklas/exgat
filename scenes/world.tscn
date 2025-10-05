@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cnn3v2fltfy3v" path="res://assets/background/stars1.png" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://6ja5jmfuopwo" path="res://scenes/collection_area.tscn" id="6_e3hyu"]
 [ext_resource type="AudioStream" uid="uid://csw41083hmrb3" path="res://assets/music/Spacejam(nur_Drums).mp3" id="8_4mrxx"]
-[ext_resource type="Script" uid="uid://drv6q67vdktv5" path="res://scripts/points.gd" id="8_e3hyu"]
+[ext_resource type="Script" path="res://scripts/points.gd" id="8_e3hyu"]
 [ext_resource type="Shader" uid="uid://5ae6j0iot63s" path="res://shaders/world_pp.gdshader" id="8_w7kh3"]
 [ext_resource type="AudioStream" uid="uid://bjcm7ua65nim2" path="res://assets/music/Spacejam(ohne_Drums).mp3" id="9_7r4gi"]
 [ext_resource type="Texture2D" uid="uid://ckckkb055dg3t" path="res://assets/player/station_waypoint.png" id="9_jhx03"]
@@ -250,6 +250,7 @@ offset_bottom = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="GUI/station_direction"]
 texture = ExtResource("9_jhx03")
+offset = Vector2(0, 12)
 
 [node name="Sprite2D2" type="Sprite2D" parent="GUI/station_direction"]
 scale = Vector2(0.7, 0.7)
