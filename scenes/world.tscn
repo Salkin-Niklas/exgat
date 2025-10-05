@@ -245,8 +245,7 @@ label_settings = SubResource("LabelSettings_k0juu")
 [node name="station_direction" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="GUI/station_direction"]
 texture = ExtResource("9_jhx03")
