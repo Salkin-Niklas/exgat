@@ -2,7 +2,7 @@ extends RigidBody2D
 
 const DELETE_DIST = 650
 const BEACON_SPEED = 80
-var trapped: bool = false
+var trapped_in: Node2D = null
 var target: Vector2 = Vector2(0,0)
 var origin: Vector2 = Vector2(0,0)
 var h: float = 0
@@ -22,9 +22,9 @@ func  _process(delta: float) -> void:
 			$"..".score(1)
 			queue_free()
 
-func toward(pos: Vector2)->void:
-	if trapped:
+func toward(pos: Node2D)->void:
+	if pos == trapped_in:
 		set_deferred("disabled", true)
-		print("Target ", pos, " set")
-		target = pos
+		print("Target ", pos.position, " set")
+		target = pos.position
 		origin = position

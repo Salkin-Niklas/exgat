@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cauqma237b67i"]
+[gd_scene load_steps=44 format=3 uid="uid://cauqma237b67i"]
 
 [ext_resource type="Script" uid="uid://bk3krcfphvl38" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cpanwsqsc672a" path="res://scenes/player.tscn" id="1_nnsk1"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://coydg7ujsh44y" path="res://scripts/gui_station_health.gd" id="14_7t5mc"]
 [ext_resource type="Texture2D" uid="uid://u2d0peyl7bna" path="res://assets/ui/Overlay.png" id="16_lakw3"]
 [ext_resource type="Script" uid="uid://dxsg37xjrjyw6" path="res://scripts/gui_init_hud.gd" id="16_pm21f"]
+[ext_resource type="Texture2D" uid="uid://b0myrriqid5rw" path="res://assets/ui/logo.png" id="17_37qwj"]
 [ext_resource type="Texture2D" uid="uid://5dabc4aeggf1" path="res://assets/ui/sfx.png" id="18_7iits"]
 [ext_resource type="Texture2D" uid="uid://dlsdxaaweuum3" path="res://assets/ui/music.png" id="18_kpybi"]
 [ext_resource type="Texture2D" uid="uid://ci2yy4l24sp25" path="res://assets/ui/music_off.png" id="19_ctatt"]
@@ -336,6 +337,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("16_pm21f")
 
+[node name="TextureRect2" type="TextureRect" parent="GUI/InitHud"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.097
+anchor_right = 1.0
+anchor_bottom = 0.202
+offset_left = 1.0
+offset_top = 0.14399719
+offset_right = -1.0
+offset_bottom = 0.10398865
+texture = ExtResource("17_37qwj")
+stretch_mode = 5
+
 [node name="TextureRect" type="TextureRect" parent="GUI/InitHud"]
 layout_mode = 1
 anchors_preset = -1
@@ -420,6 +434,21 @@ stretch_mode = 4
 [node name="Timer" type="Timer" parent="GUI/Gameover"]
 one_shot = true
 
+[node name="Label" type="Label" parent="GUI/Gameover"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.42900002
+anchor_right = 1.0
+anchor_bottom = 0.588
+offset_left = -1.0
+offset_top = 0.0079956055
+offset_right = -1.0
+offset_bottom = -15.023987
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("8_e3hyu")
+
 [node name="music_drums" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("8_4mrxx")
@@ -442,6 +471,7 @@ script = ExtResource("25_xgqkh")
 [connection signal="health_changed" from="Game/Player" to="GUI/healthbar/health_Player" method="_on_player_health_changed"]
 [connection signal="pause_requested" from="Game/Player" to="GUI/InitHud" method="_on_player_pause_requested"]
 [connection signal="on_score" from="Game/ScrapSpawner" to="GUI/Score/Label" method="_on_scrap_spawner_on_score"]
+[connection signal="on_score" from="Game/ScrapSpawner" to="GUI/Gameover/Label" method="_on_scrap_spawner_on_score"]
 [connection signal="timeout" from="Game/ScrapSpawner/Timer" to="Game/ScrapSpawner" method="_on_timer_timeout"]
 [connection signal="toggled" from="GUI/InitHud/Music" to="music_drums" method="_on_music_toggled"]
 [connection signal="toggled" from="GUI/InitHud/Music" to="music" method="_on_music_toggled"]
@@ -450,3 +480,4 @@ script = ExtResource("25_xgqkh")
 [connection signal="reset" from="GUI/Gameover" to="Game/Player" method="_on_gameover_reset"]
 [connection signal="reset" from="GUI/Gameover" to="Game/collection1" method="_on_gameover_reset"]
 [connection signal="reset" from="GUI/Gameover" to="GUI/Score/Label" method="_on_gameover_reset"]
+[connection signal="reset" from="GUI/Gameover" to="GUI/Gameover/Label" method="_on_gameover_reset"]

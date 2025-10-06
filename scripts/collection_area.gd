@@ -94,20 +94,20 @@ func _on_net_body_entered(body: Node2D) -> void:
 	if body is RigidBody2D:
 		print("Scrap entered Net")
 		body.linear_damp_mode = RigidBody2D.DAMP_MODE_COMBINE
-		body.linear_damp = 0.7
-		body.trapped = true
+		body.linear_damp = 0.9
+		body.trapped_in = self
 
 
 func _on_net_timer_timeout() -> void:
 	is_translating = 6
-	get_tree().call_group("Scrap", "toward", position)
+	get_tree().call_group("Scrap", "toward", self)
 
 
 func _on_net_body_exited(body: Node2D) -> void:
 	if body is RigidBody2D:
 		print("Scrap exited Net")
 		body.linear_damp = 0
-		body.trapped = false
+		body.trapped_in = null
 
 
 func _on_gameover_reset() -> void:
