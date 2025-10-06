@@ -174,7 +174,7 @@ z_index = -2
 scroll_scale = Vector2(0.6, 0.6)
 scroll_offset = Vector2(-337, 117)
 repeat_size = Vector2(1024, 1024)
-repeat_times = 3
+repeat_times = 5
 
 [node name="ColorRect" type="ColorRect" parent="Game/Parallax2D"]
 offset_left = -512.0
@@ -190,7 +190,7 @@ texture = ExtResource("5_71j4m")
 z_index = -2
 scroll_scale = Vector2(0.7, 0.7)
 repeat_size = Vector2(1024, 1024)
-repeat_times = 3
+repeat_times = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Game/Parallax2D2"]
 texture = ExtResource("3_qfnet")
