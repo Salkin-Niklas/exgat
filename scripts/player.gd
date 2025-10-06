@@ -10,6 +10,8 @@ var health: float = 100.0
 var trapped_debris: Array[RigidBody2D] = []
 var gameover: bool = false
 
+var last_escape: bool = false
+
 @export var line2d: Line2D
 @export var line2d2: Line2D
 # Maximum number of points in the trail
@@ -39,9 +41,11 @@ func _physics_process(delta: float) -> void:
 			rotation += TURNING_SPEED*delta
 			base += "L"
 			
-		if Input.is_key_pressed(KEY_ESCAPE):
+		if Input.is_action_just_pressed("Pause"):
 			$"../../GUI/InitHud".show()
 			pause_requested.emit()
+			print("paused")
+			
 		
 	$eninge_sound.stream_paused = base == "idle"
 		
@@ -60,7 +64,7 @@ func _physics_process(delta: float) -> void:
 			###if impulse.length() > 10 and $HitEffectTimeout.is_stopped():
 			
 			var damage: float = abs(c.get_collider().linear_velocity.dot(c.get_normal())) + abs(self.velocity.dot(c.get_normal())) / 5
-			print("damaged by ", damage)
+			#print("damaged by ", damage)
 			if damage < 5.0 or not $HitEffectTimeout.is_stopped():
 				damage = 0.0
 			else:
@@ -144,6 +148,7 @@ func _on_gameover_reset() -> void:
 	position = Vector2(0, 347)
 	rotation = 0
 	gameover = false
+	reset_trail()
 
 
 func _on_station_gameover() -> void:

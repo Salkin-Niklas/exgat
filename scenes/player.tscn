@@ -130,12 +130,14 @@ default_color = Color(0.22352941, 0.46666667, 0.5294118, 1)
 stream = ExtResource("3_qhqgy")
 volume_db = -2.863
 autoplay = true
+bus = &"SFX"
 parameters/looping = true
 
 [node name="beam_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_dqkch")
 volume_db = 12.403
 autoplay = true
+bus = &"SFX"
 parameters/looping = true
 
 [connection signal="timeout" from="HitEffectTimeout" to="." method="_on_hit_effect_timeout_timeout"]

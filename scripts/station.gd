@@ -39,4 +39,4 @@ func _on_gameover_reset() -> void:
 		if c is CollisionObject2D:
 			c.set_deferred("disabled", false)
 			c.show()
-			$Sprite2D.show()
+	$Sprite2D.show()

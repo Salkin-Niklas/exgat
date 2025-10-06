@@ -7,11 +7,14 @@ func update()->void:
 	$"../healthbar".hide()
 	$"../Score".hide()
 	$Timer.start()
+	get_tree().paused = true
 	
 func _process(_delta: float)->void:
-	if (Input.is_anything_pressed() or Input.is_action_just_pressed("Boost") or Input.is_action_just_pressed("TractorBeam") or Input.is_action_just_pressed("TurnL") or Input.is_action_just_pressed("TurnR")) and not hidden and $Timer.is_stopped():
+	if visible and (Input.is_action_just_pressed("Boost") or Input.is_action_just_pressed("TractorBeam") or Input.is_action_just_pressed("TurnL") or Input.is_action_just_pressed("TurnR") or Input.is_action_just_pressed("Pause")):
+		print("triggered")
 		$"../InitHud".show()
-		$"../InitHud/Timer".start()
+		$"../InitHud".init()
+		$"../InitHud/TextureRect".texture = preload("res://assets/ui/Overlay.png")
 		reset.emit()
 		for c in get_tree().get_nodes_in_group("Scrap"):
 			c.queue_free()
