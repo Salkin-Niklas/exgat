@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cauqma237b67i"]
+[gd_scene load_steps=43 format=3 uid="uid://cauqma237b67i"]
 
 [ext_resource type="Script" uid="uid://bk3krcfphvl38" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cpanwsqsc672a" path="res://scenes/player.tscn" id="1_nnsk1"]
@@ -24,7 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://ci2yy4l24sp25" path="res://assets/ui/music_off.png" id="19_ctatt"]
 [ext_resource type="Texture2D" uid="uid://doaj1cb73n5se" path="res://assets/ui/sfx_off.png" id="19_oo54l"]
 [ext_resource type="Script" uid="uid://bu08t4lchnmjd" path="res://scripts/gui_sfx.gd" id="22_munwf"]
+[ext_resource type="Script" uid="uid://cm0qhrdkee5jy" path="res://scripts/gameover.gd" id="23_0nbtd"]
 [ext_resource type="Script" uid="uid://d1ih82dhs83j" path="res://scripts/music_drums.gd" id="23_ctatt"]
+[ext_resource type="Texture2D" uid="uid://6alqum0xgjbq" path="res://assets/ui/gameover.png" id="23_ts3gi"]
 [ext_resource type="Script" uid="uid://cftiaq4a3etdr" path="res://scripts/music.gd" id="25_xgqkh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e3hyu"]
@@ -191,9 +193,6 @@ repeat_times = 3
 [node name="Sprite2D" type="Sprite2D" parent="Game/Parallax2D2"]
 texture = ExtResource("3_qfnet")
 
-[node name="Node2D" parent="Game" instance=ExtResource("6_e3hyu")]
-position = Vector2(-176, 303)
-
 [node name="Station" parent="Game" instance=ExtResource("2_rwgxs")]
 
 [node name="Trail" type="Line2D" parent="Game"]
@@ -223,6 +222,12 @@ script = ExtResource("4_k0juu")
 [node name="Timer" type="Timer" parent="Game/ScrapSpawner"]
 wait_time = 5.0
 autostart = true
+
+[node name="collection1" parent="Game" instance=ExtResource("6_e3hyu")]
+position = Vector2(-176, 303)
+
+[node name="collection2" parent="Game" instance=ExtResource("6_e3hyu")]
+position = Vector2(311, -374)
 
 [node name="Postprocessing" type="CanvasLayer" parent="Game"]
 
@@ -382,6 +387,35 @@ script = ExtResource("22_munwf")
 wait_time = 0.3
 autostart = true
 
+[node name="Gameover" type="Control" parent="GUI"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("23_0nbtd")
+
+[node name="TextureRect" type="TextureRect" parent="GUI/Gameover"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21400002
+anchor_top = 0.30600002
+anchor_right = 0.785
+anchor_bottom = 0.76400006
+offset_left = 0.47198486
+offset_top = -0.28800964
+offset_right = -0.32000732
+offset_bottom = -0.072052
+texture = ExtResource("23_ts3gi")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="Timer" type="Timer" parent="GUI/Gameover"]
+one_shot = true
+
 [node name="music_drums" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("8_4mrxx")
@@ -398,6 +432,8 @@ autoplay = true
 parameters/looping = true
 script = ExtResource("25_xgqkh")
 
+[connection signal="gameover" from="Game/Station" to="." method="_on_station_gameover"]
+[connection signal="gameover" from="Game/Station" to="Game/Player" method="_on_station_gameover"]
 [connection signal="health_changed" from="Game/Station" to="GUI/healthbar/health_Station" method="_on_station_health_changed"]
 [connection signal="health_changed" from="Game/Player" to="GUI/healthbar/health_Player" method="_on_player_health_changed"]
 [connection signal="pause_requested" from="Game/Player" to="GUI/InitHud" method="_ready"]
@@ -406,3 +442,5 @@ script = ExtResource("25_xgqkh")
 [connection signal="toggled" from="GUI/InitHud/Music" to="music_drums" method="_on_music_toggled"]
 [connection signal="toggled" from="GUI/InitHud/Music" to="music" method="_on_music_toggled"]
 [connection signal="toggled" from="GUI/InitHud/SFX" to="GUI/InitHud/SFX" method="_on_toggled"]
+[connection signal="reset" from="GUI/Gameover" to="Game/Station" method="_on_gameover_reset"]
+[connection signal="reset" from="GUI/Gameover" to="Game/Player" method="_on_gameover_reset"]

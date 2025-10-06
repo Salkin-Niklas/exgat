@@ -9,17 +9,6 @@ subpixel_positioning = 0
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_jfbh3")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 67.0
-offset_top = 98.0
-offset_right = 190.0
-offset_bottom = 140.0
-theme_override_colors/font_color = Color(0.21960784, 0.8627451, 0.94509804, 1)
-theme_override_fonts/font = SubResource("SystemFont_jfbh3")
-theme_override_font_sizes/font_size = 30
-text = "30"
-horizontal_alignment = 1
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 30.0
 autostart = true
@@ -30,5 +19,28 @@ autostart = true
 wait_time = 0.25
 autostart = true
 
+[node name="NetTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+z_index = -2
+z_as_relative = false
+offset_left = -60.0
+offset_top = -21.0
+offset_right = 63.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.21960784, 0.8627451, 0.94509804, 1)
+theme_override_fonts/font = SubResource("SystemFont_jfbh3")
+theme_override_font_sizes/font_size = 60
+text = "30"
+horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+
 [connection signal="body_entered" from="Net" to="." method="_on_net_body_entered"]
+[connection signal="body_exited" from="Net" to="." method="_on_net_body_exited"]
 [connection signal="timeout" from="BeaconTimer" to="." method="_on_beacon_timer_timeout"]
+[connection signal="timeout" from="NetTimer" to="." method="_on_net_timer_timeout"]

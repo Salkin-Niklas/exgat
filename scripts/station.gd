@@ -1,15 +1,18 @@
 extends Area2D
 
-var health: float = 4
+var health: int = 4
+var raised: bool = false
 
 signal gameover()
 signal health_changed(health: int)
 
 func _process(_delta: float) -> void:
-	if health<=0:
+	if health<=0 and not raised:
 		emit_signal("gameover")
-		$Sprite2D.texture = preload("res://assets/station/station.png")
+		print("Game over!")
+		#$Sprite2D.texture = preload("res://assets/station/station.png")
 		$Sprite2D.hide()
+		raised = true
 
 func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int, local_shape_index: int) -> void:
 	#var other_shape_owner = body.shape_find_owner(body_shape_index)
@@ -27,3 +30,13 @@ func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int
 	health -= 1
 	health_changed.emit(health)
 	print("station damaged, ", health)
+
+
+func _on_gameover_reset() -> void:
+	health = 4
+	raised = false
+	for c in get_children():
+		if c is CollisionObject2D:
+			c.set_deferred("disabled", false)
+			c.show()
+			$Sprite2D.show()

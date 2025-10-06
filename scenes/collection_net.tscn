@@ -8,6 +8,8 @@ _data = [Vector2(0, 0), 0.0, 2.7830598, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, V
 point_count = 3
 
 [node name="Net" type="Area2D"]
+z_index = -2
+z_as_relative = false
 scale = Vector2(8, 8)
 disable_mode = 2
 script = ExtResource("1_4slge")
@@ -18,7 +20,6 @@ n4 = Vector2(21, 40)
 curve = SubResource("Curve_mil3k")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-z_index = -1
 
 [node name="Line_outer" type="Line2D" parent="."]
 points = PackedVector2Array(6.375, -0.375)
@@ -45,5 +46,3 @@ sprite_frames = ExtResource("2_mil3k")
 autoplay = "default"
 frame_progress = 0.63561934
 offset = Vector2(0, -1)
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

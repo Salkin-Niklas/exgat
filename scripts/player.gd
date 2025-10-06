@@ -8,6 +8,7 @@ const BREAK_FORCE: float = 150
 var health: float = 100.0
 
 var trapped_debris: Array[RigidBody2D] = []
+var gameover: bool = false
 
 @export var line2d: Line2D
 @export var line2d2: Line2D
@@ -23,23 +24,24 @@ signal pause_requested()
 
 func _physics_process(delta: float) -> void:
 	var base: String = "idle"
-	if Input.is_action_pressed("Boost"):
-		var normal = Vector2(cos(rotation+PI/2), sin(rotation+PI/2))
-		var break_boost = (normal.dot(velocity.normalized()) + 1) * BREAK_FORCE / 2
-		#print(normal.dot(velocity.normalized()))
-		velocity.x += (BOOST_FORCE+break_boost)*delta * sin(rotation)
-		velocity.y -= (BOOST_FORCE+break_boost)*delta * cos(rotation)
-		base = "boost"
-	if Input.is_action_pressed("TurnL"):
-		rotation -= TURNING_SPEED*delta
-		base += "R"
-	elif Input.is_action_pressed("TurnR"):
-		rotation += TURNING_SPEED*delta
-		base += "L"
-		
-	if Input.is_key_pressed(KEY_ESCAPE):
-		$"../../GUI/InitHud".show()
-		pause_requested.emit()
+	if (not gameover):
+		if Input.is_action_pressed("Boost"):
+			var normal = Vector2(cos(rotation+PI/2), sin(rotation+PI/2))
+			var break_boost = (normal.dot(velocity.normalized()) + 1) * BREAK_FORCE / 2
+			#print(normal.dot(velocity.normalized()))
+			velocity.x += (BOOST_FORCE+break_boost)*delta * sin(rotation)
+			velocity.y -= (BOOST_FORCE+break_boost)*delta * cos(rotation)
+			base = "boost"
+		if Input.is_action_pressed("TurnL"):
+			rotation -= TURNING_SPEED*delta
+			base += "R"
+		elif Input.is_action_pressed("TurnR"):
+			rotation += TURNING_SPEED*delta
+			base += "L"
+			
+		if Input.is_key_pressed(KEY_ESCAPE):
+			$"../../GUI/InitHud".show()
+			pause_requested.emit()
 		
 	$eninge_sound.stream_paused = base == "idle"
 		
@@ -65,7 +67,7 @@ func _physics_process(delta: float) -> void:
 				$HitEffectTimeout.start()
 				$Sprite.modulate = Color(2,2,2)
 			#print(damage)
-			health-= damage
+			health -= damage
 			health_changed.emit(health/25)
 
 	if Input.is_action_pressed("TractorBeam"):
@@ -132,3 +134,14 @@ func reset_trail():
 	if line2d != null:
 		line2d.clear_points()
 		distance_accum = 0.0
+
+
+func _on_gameover_reset() -> void:
+	velocity = Vector2(0,0)
+	position = Vector2(0, 347)
+	rotation = 0
+	gameover = false
+
+
+func _on_station_gameover() -> void:
+	gameover = true

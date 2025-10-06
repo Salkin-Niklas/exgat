@@ -36,3 +36,8 @@ func _process(delta: float) -> void:
 		$GUI/station_direction.hide()
 	else:
 		$GUI/station_direction.show()
+
+
+func _on_station_gameover() -> void:
+	$"GUI/Gameover".show()
+	$"GUI/Gameover".update()
