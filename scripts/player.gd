@@ -144,14 +144,14 @@ func reset_trail():
 		line2d2.clear_points()
 		distance_accum = 0.0
 
-
 func _on_gameover_reset() -> void:
 	velocity = Vector2(0,0)
 	position = Vector2(0, 347)
 	rotation = 0
 	gameover = false
 	reset_trail()
-
+	show()
 
 func _on_station_gameover() -> void:
 	gameover = true
+	hide()
