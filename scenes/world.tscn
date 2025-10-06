@@ -454,7 +454,6 @@ process_mode = 3
 stream = ExtResource("8_4mrxx")
 volume_db = -8.6
 autoplay = true
-parameters/looping = true
 script = ExtResource("23_ctatt")
 
 [node name="music" type="AudioStreamPlayer" parent="."]
@@ -462,7 +461,6 @@ process_mode = 3
 stream = ExtResource("9_7r4gi")
 volume_db = 8.588
 autoplay = true
-parameters/looping = true
 script = ExtResource("25_xgqkh")
 
 [connection signal="gameover" from="Game/Station" to="." method="_on_station_gameover"]
@@ -481,3 +479,5 @@ script = ExtResource("25_xgqkh")
 [connection signal="reset" from="GUI/Gameover" to="Game/collection1" method="_on_gameover_reset"]
 [connection signal="reset" from="GUI/Gameover" to="GUI/Score/Label" method="_on_gameover_reset"]
 [connection signal="reset" from="GUI/Gameover" to="GUI/Gameover/Label" method="_on_gameover_reset"]
+[connection signal="finished" from="music_drums" to="music_drums" method="_on_finished"]
+[connection signal="finished" from="music" to="music" method="_on_finished"]

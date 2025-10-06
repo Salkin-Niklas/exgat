@@ -155,3 +155,11 @@ func _on_gameover_reset() -> void:
 func _on_station_gameover() -> void:
 	gameover = true
 	hide()
+
+
+func _on_eninge_sound_finished() -> void:
+	$eninge_sound.play()
+
+
+func _on_beam_sound_finished() -> void:
+	$beam_sound.play()

@@ -5,3 +5,7 @@ func  _ready() -> void:
 
 func _on_music_toggled(toggled_on: bool) -> void:
 	playing = toggled_on
+
+
+func _on_finished() -> void:
+	play()

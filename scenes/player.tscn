@@ -130,16 +130,16 @@ default_color = Color(0.22352941, 0.46666667, 0.5294118, 1)
 stream = ExtResource("3_qhqgy")
 volume_db = -2.863
 autoplay = true
-bus = &"SFX"
 parameters/looping = true
 
 [node name="beam_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_dqkch")
 volume_db = 12.403
 autoplay = true
-bus = &"SFX"
 parameters/looping = true
 
 [connection signal="timeout" from="HitEffectTimeout" to="." method="_on_hit_effect_timeout_timeout"]
 [connection signal="body_entered" from="Tractor" to="." method="_on_tractor_body_entered"]
 [connection signal="body_exited" from="Tractor" to="." method="_on_tractor_body_exited"]
+[connection signal="finished" from="eninge_sound" to="." method="_on_eninge_sound_finished"]
+[connection signal="finished" from="beam_sound" to="." method="_on_beam_sound_finished"]
