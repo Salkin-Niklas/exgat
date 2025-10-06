@@ -135,11 +135,13 @@ func _ready():
 		return
 	# Ensure the line2d node is empty at the start
 	line2d.clear_points()
+	line2d2.clear_points()
 	
 # Optionally, you can reset the trail
 func reset_trail():
 	if line2d != null:
 		line2d.clear_points()
+		line2d2.clear_points()
 		distance_accum = 0.0
 
 

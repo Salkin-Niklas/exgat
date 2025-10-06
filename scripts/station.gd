@@ -38,5 +38,7 @@ func _on_gameover_reset() -> void:
 	for c in get_children():
 		if c is CollisionObject2D:
 			c.set_deferred("disabled", false)
+			c.get_child(0).show()
 			c.show()
 	$Sprite2D.show()
+	health_changed.emit(4)

@@ -448,4 +448,5 @@ script = ExtResource("25_xgqkh")
 [connection signal="toggled" from="GUI/InitHud/SFX" to="GUI/InitHud/SFX" method="_on_toggled"]
 [connection signal="reset" from="GUI/Gameover" to="Game/Station" method="_on_gameover_reset"]
 [connection signal="reset" from="GUI/Gameover" to="Game/Player" method="_on_gameover_reset"]
+[connection signal="reset" from="GUI/Gameover" to="Game/collection1" method="_on_gameover_reset"]
 [connection signal="reset" from="GUI/Gameover" to="GUI/Score/Label" method="_on_gameover_reset"]

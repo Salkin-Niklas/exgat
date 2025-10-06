@@ -108,3 +108,7 @@ func _on_net_body_exited(body: Node2D) -> void:
 		print("Scrap exited Net")
 		body.linear_damp = 0
 		body.trapped = false
+
+
+func _on_gameover_reset() -> void:
+	reset()
