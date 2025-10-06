@@ -80,12 +80,15 @@ func _physics_process(delta: float) -> void:
 		$Tractor.hide()
 	if $Tractor.monitoring == true:
 		for d in trapped_debris:
+			if d.trapped: continue
 			var force: Vector2 = Vector2(0,0)
-			force -= (d.global_position-(global_position+Vector2(0,-85).rotated(rotation)))*10
+			force -= (d.global_position-(global_position+Vector2(0,-130).rotated(rotation)))*100
 			force -= (d.linear_velocity-velocity)*100
-			#print(d.linear_velocity)
+			if base.ends_with("R"):
+				force += Vector2(200,0).rotated(rotation)
+			elif base.ends_with("L"):
+				force += Vector2(-200,0).rotated(rotation)
 			d.apply_central_force(force)
-		#print(velocity)
 
 	var trail_pos   = to_global(Vector2(18,25))
 	var trail_pos_2 = to_global(Vector2(-18,25))
